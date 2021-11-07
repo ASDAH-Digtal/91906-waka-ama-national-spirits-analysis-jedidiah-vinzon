@@ -3,6 +3,15 @@ from tkinter import *
 from tkinter import ttk
 import os
 
+# Where classes are made
+class Player:
+    def __init__(self, place, id, team_name, regional_association):
+        self.place = place
+        self.id = id
+        self.team_name = team_name
+        self.regional_association = regional_association
+
+
 # Where functions are made
 def read_files():
     files = []
@@ -20,7 +29,23 @@ def read_files():
     results_text.set("There are {} files about the finals in the year {}".format(number_of_files, year.get()))
 
 def analyse_files():
-    pass
+    files = []
+    keyword = "final"
+
+    path = "waka\\WakaNats{}".format(year.get())
+    dirs = os.listdir(path)
+
+    for file in dirs:
+        if keyword in file.lower():
+            files.append(file)
+        else: pass
+    
+    # number_of_files = len(files)
+    # results_text.set("There are {} files about the finals in the year {}".format(number_of_files, year.get()))
+
+    for game in files:
+        f = open(game, "r")
+        pass
 
 # Setting up root
 root = Tk()
