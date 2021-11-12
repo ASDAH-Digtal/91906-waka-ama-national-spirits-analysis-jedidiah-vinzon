@@ -11,5 +11,5 @@ Example of .lif file (001-Heat 1-01.lif)
 8,54490,2,Kurawaka,,Te Toki Voyaging Trust,2:27.08,,18.62,,,11:08:53.17,,,,18.62,18.62
 
 FIRST LINE >>> Race number, race type, heat, title, [5], length, start time, [6]
-SECOND LINE >>> place, team id, lane, team name, [1], regional association, elapsed time, [1], elapsed time, [2], start time, [3], elapsed time, elapsed time
+SECOND LINE >>> place [0], team id [1], lane, team name, [1], regional association, elapsed time, [1], elapsed time, [2], start time, [3], elapsed time, elapsed time
 OTHER LINES >>> PLACE, TEAM ID, LANE, TEAM NAME, [1], REGIONAL ASSOCIATION, ELAPSED TIME, [1], DIFFERENCE, [2], START TIME, [3], DIFFERENCE, DIFFERENCE
