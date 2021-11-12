@@ -1,6 +1,7 @@
 # Imports
 from tkinter import *
 from tkinter import ttk
+import time
 import os
 
 # Where classes are made
@@ -22,6 +23,7 @@ def read_files():
 
     for file in dirs:
         if keyword in file.lower():
+            file_read_text.set("Reading: {}".format(str(file)))
             files.append(file)
         else: pass
     
@@ -36,6 +38,8 @@ def analyse_files():
     dirs = os.listdir(path)
 
     for file in dirs:
+        
+        # file_read.configure(text="Reading: {}".format(str(file)))
         if keyword in file.lower():
             files.append(file)
         else: pass
@@ -56,6 +60,7 @@ root.title("Waka Ama New Zealand Club")
 # Variables
 year = StringVar()
 results_text = StringVar()
+file_read_text = StringVar()
 
 # Setting up frames
 frame1 = ttk.LabelFrame(root, text="Available Folders")
@@ -77,5 +82,6 @@ results = ttk.Label(frame2, textvariable=results_text, justify="center")
 results_text.set("The results of your query will be found here!")
 results.grid(row=0, column=0)
 
+file_read = ttk.Label(frame2, textvariable=file_read_text, justify="center").grid(row=1, column=0)
 # Run everything
 root.mainloop()
