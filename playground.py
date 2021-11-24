@@ -1,5 +1,24 @@
 import os
 
+def replace():
+    files = []
+
+    keyword = "final"
+
+    path1 = "waka\\WakaNats2017"
+    path2 = "waka\\WakaNats2018"
+
+    dirs1 = os.listdir(path1)
+    dirs2 = os.listdir(path2)
+
+    for file in dirs1:
+        if keyword in file.lower():
+            file.append(file)
+        else: pass
+    
+    for games in files:
+        f = open("{}\\{}".format(path1, files), "a")
+
 def analyse_files():
     """Analyses all the files with the keyword: 'final'; and shows all the points for each Regional Association"""
     files = []
@@ -31,7 +50,7 @@ def analyse_files():
 
         #print(str(f.readlines()).split(","))
 
-analyse_files()
+# analyse_files()
 
 """asd = "asdfasdfkashafasdsda,asfkhdflhfasdf,adf,a,s,,,asdfasdfasdf,,,asd,fasdfhsa,,,asdf"
 asdf = asd.replace(","," ")
@@ -43,3 +62,4 @@ print(jkl)
 for entries in jkl:
     if entries == "": pass
     else: print(entries)"""
+

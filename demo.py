@@ -1,27 +1,5 @@
 import os
 
-race = {
-    "race_number": "",
-    "race_type": "",
-    "race_heat": "",
-    "race_title": ""
-}
-
-"""class Race:
-    def __init__(self, race_number, race_type, race_heat, race_title):
-        self.race_number = race_number
-        self.race_type = race_type
-        self.race_heat = race_heat
-        self.race_title = race_title
-
-class Team:
-    def __init__(self, place, team_id, team_name, regional_association):
-        self.place = place
-        self.team_id = team_id
-        self.team_name = team_name
-        self.regional_association = regional_association
-"""
-
 class Regional:
     def __init__(self, name, points):
         self.name = name
@@ -70,21 +48,6 @@ def main():
 count = 0
 reg_ass = []
 
-"""f = open("waka\\WakaNats2017\\001-Heat 1-01.lif", "r")
-for line in f.readlines():
-    if count == 0:
-        pass
-    else:
-        if line[5] in reg_ass:
-            pass
-        else:
-            temp_obj = Regional(line[5], 0)
-            temp_obj.add_points(int(line[0]))
-            reg_ass.append(temp_obj)
-
-            print(line, reg_ass)
-    count += 1"""
-
 def error(line_count, file_name):
     f = open("waka\\WakaNats{}\\{}".format(2018, file_name), "r")
     lines = []
@@ -120,38 +83,38 @@ def analyse_files():
 
     for game in files:
         f = open("waka\\WakaNats2018\\{}".format(game), "r")    # opens the files found in the 'files' list and reads them
-        
-        # lines_in_file = f.readlines()       # puts all the lines inside the file into variable lines_in_file
 
         line_count = 0
 
-        for line in str(f.readlines()).strip(","):          # reads every line per file
+        for line in f.readlines():          # reads every line per file
             total_count += 1                # increments the total number of lines there are
                         
             if line_count == 0:             # if the line count is the very first line ...
                 line_count += 1             # ignore that line and continue on by incrementing line_count by 1
             
             else:
-                if line[5] in reg_ass:      # otherwise, if the sixth index of the line is inside the list called 'reg_ass' ...
-                    try:
-                       total_points(temp_obj, line[0])
-                       print(f"{temp_obj.name}:{temp_obj.points}")
-                       print("asdf")
-                    except:
-                        error(line_count, game)
+                try:
+                    line = str(line).replace(","," ")                   #JIC
+                    if line[5] in reg_ass:                              # otherwise, if the sixth index of the line is inside the list called 'reg_ass' ...
+                        try:
+                            total_points(temp_obj, line[0])
+                            print(f"{temp_obj.name}:{temp_obj.points}")
+                        except:
+                            error(line_count, game)
                 
-                else:                                                                       # otherwise, if the regional association is not in the list
-                    try:
-                        temp_obj = Regional(line[5], 0)                                     # it's going to try and add that object into the class Regional 
-                        temp_obj.add_points(int(line[0]))                                   # it's going to add points according to the position that it is in
-                        reg_ass.append(temp_obj)                                            # and then it's going to add that object inside the list 'reg_ass'
+                    else:                                                                       # otherwise, if the regional association is not in the list
+                        try:
+                            temp_obj = Regional(line[5], 0)                                     # it's going to try and add that object into the class Regional 
+                            temp_obj.add_points(int(line[0]))                                   # it's going to add points according to the position that it is in
+                            reg_ass.append(temp_obj)                                            # and then it's going to add that object inside the list 'reg_ass'
                         
-                        #print(f"{total_count}: {line_count} >>> {line}{temp_obj}\n")        # this prints the total number of lines, the lines within the file and the line of the file it self
-                        
-                        line_count += 1
-                    except ValueError:
-                        error(line_count, game)                                             # this checks if there is something wrong with the code, and then prints an error
-            
-            
+                            print(f"{total_count}: {line_count} >>> {line}{temp_obj}\n")        # this prints the total number of lines, the lines within the file and the line of the file it self
+
+                            line_count += 1
+                        except ValueError:
+                            error(line_count, game)                                             # this checks if there is something wrong with the code, and then prints an error 
+
+                except:
+                    pass
 
 analyse_files()
