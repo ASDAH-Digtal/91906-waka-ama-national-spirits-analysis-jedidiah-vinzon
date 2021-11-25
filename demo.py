@@ -73,7 +73,7 @@ def analyse_files():
     line_count = 0
     total_count = 0
 
-    path = "waka\\WakaNats{}".format(2018)
+    path = "WakaNats{}".format(2018)
     dirs = os.listdir(path)
 
     for file in dirs:               # runs through all the files in the directory
@@ -82,7 +82,7 @@ def analyse_files():
         else: pass                  # otherwise, the loop passes the file
 
     for game in files:
-        f = open("waka\\WakaNats2018\\{}".format(game), "r")    # opens the files found in the 'files' list and reads them
+        f = open("WakaNats2018\\{}".format(game), "r")    # opens the files found in the 'files' list and reads them
 
         line_count = 0
 

@@ -43,36 +43,56 @@ class Regional:
 def read_files():
     """This function finds the files to be read with the keyword: 'final' and prints how many there are"""
 
+    # These variables are initialized to prepare the rest of the function
     files = []
     keyword = "final"
 
+    # Prepares the files to be read inside the folders depending on the year fetched
     path = "WakaNats{}".format(year.get())
     dirs = os.listdir(path)
 
+    # Loops through all the files from the directory, and checks if the keyword is found
     for file in dirs:
         if keyword in file.lower():
             files.append(file)
         else: pass
-    
+
+    # Changes the results to show how many files there are in the folder with the keyword
     results_text.set(f"There are {len(files)} files about the finals in the year {year.get()}")
 
 def anaylyse_files():
     """This functions analyses all the files with the keyword: 'final' and shows all the points for each Regional Association"""
 
+    # Initializes the variable used for the rest of the function
     files = []
     keyword = "final"
-    count = 0
+    totalCount = 0
 
+    # Prepares to find all the files that needs to be found inside the directory
     path = "WakaNats{}".format(year.get())
     dirs = os.listdir(path)
 
+    # Loops through all the files in the directory and adds it to the list if it has the keyword in it
     for file in dirs:
         if keyword in file.lower():
             files.append(file)
         else: pass
     
+    # Loops through all the files inside the list and opens it up
     for play in files:
         f = open(play, "r")
+
+        lineCount = 0
+
+        for line in f.readlines():  # Reads every line in each file
+            totalCount += 1
+
+            if lineCount == 0:      # Checks if the line count is the very first line
+                lineCount += 1      # Ignores that line and continues on
+                continue
+
+            else:
+                pass
 
 # HERE IS WHERE FUNCTOINS END #
 
