@@ -4,7 +4,7 @@ from os import walk
 def display_clubs(clubs):
     display = tk.Toplevel(root)
     display.title("Full Club Points")
-    display.iconbitmap("waka.ico")
+    #display.iconbitmap("waka.ico")
     
     # Turn dict into list
     results = [ [k,v] for k, v in clubs.items() ]
@@ -96,7 +96,7 @@ FG_COLOUR = "#FFFFFF"
 
 root = tk.Tk()
 root.title("Waka Ama Competition")
-root.iconbitmap("waka.ico")
+#root.iconbitmap("waka.ico")
 root.configure(bg = BG_COLOUR)
 
 waka_title = tk.Label(text="Waka Ama\nCompetition", font = ("Arial", 42), bg = BG_COLOUR, fg = FG_COLOUR)
