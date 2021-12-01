@@ -4,6 +4,7 @@
 
 from tkinter import *
 from tkinter import ttk
+from os import walk
 import os
 
 # IMPORTS #
@@ -16,7 +17,7 @@ class Regional:
         self.name = name
         self.points = points
     
-    def add_points(self, position):
+    """def add_points(self, position):
         if position == 1:
             self.points += 8
         elif position == 2:
@@ -32,13 +33,73 @@ class Regional:
         elif position == 7:
             self.points += 2
         else:
-            self.points += 1
+            self.points += 1"""
 
 
 # HERE IS WHERE CLASSES END #
 
 
 # HERE IS WHERE FUNCTIONS ARE MADE #
+
+def show_results(clubs):
+    """This function prints the results of all the races, including the final points of the regional associations"""
+    
+    finalResults = Toplevel(root)
+    finalResults.title("Club Points")
+
+    results = [ [k,v] for k, v in clubs.items() ]
+    results.sort(key = lambda x: x[1])
+    results_listbox = Listbox(finalResults, width=40, height=60)
+
+    for x in results:
+        if x[[0][0]] == "":
+            continue
+        
+        adding_student = "{}".format(x)
+        results_listbox.insert(0, adding_student)
+    
+    results_listbox.grid(row=0, column=0)
+    print(results)
+
+def add_points(year, finalRace):
+    """This function adds the points for all the regional associations in the current year and prints the results"""
+    
+    clubs = {}
+
+    for race in finalRace:
+        currentRace = open("WakaNats{}\{}".format(year, race), "r")
+
+        for club in currentRace:
+            waka = club.strip().split(",")
+
+            score = 0
+
+            if waka[0] == "1":
+                score = 8
+            elif waka[0] == "2":
+                score = 7
+            elif waka[0] == "3":
+                score = 6
+            elif waka[0] == "4":
+                score = 5
+            elif waka[0] == "5":
+                score = 4
+            elif waka[0] == "6":
+                score = 3
+            elif waka[0] == "7":
+                score = 2
+            elif waka[0] != "":
+                score = 0
+            else:
+                score = 1
+            
+            if waka[5] not in clubs:
+                clubs[waka[5]] = score
+            else:
+                clubs[waka[5]] = clubs.get(waka[5]) + score
+            
+        currentRace.close()
+    show_results(clubs)
 
 def read_files():
     """This function finds the files to be read with the keyword: 'final' and prints how many there are"""
@@ -63,6 +124,7 @@ def read_files():
 def anaylyse_files():
     """This functions analyses all the files with the keyword: 'final' and shows all the points for each Regional Association"""
 
+    """ 
     # Initializes the variable used for the rest of the function
     files = []
     keyword = "final"
@@ -80,7 +142,7 @@ def anaylyse_files():
     
     # Loops through all the files inside the list and opens it up
     for play in files:
-        f = open(play, "r")
+        f = open("{}\\{}".format(path, play), "r")
 
         lineCount = 0
 
@@ -93,11 +155,37 @@ def anaylyse_files():
 
             else:
                 pass
+    """
+    
+    races = []
+    currentYear = year.get()
+
+    for root, dirs, files in walk("WakaNats{}".format(currentYear)):
+        races.extend(files)
+        break
+
+    finalRaces = []
+
+    FINAL_NAMES = ["Final"]
+
+    for race in races:
+        if "Final" in race:
+            finalRaces.append(race)
+    
+    print(finalRaces)
+    add_points(currentYear, finalRaces)
+    
 
 # HERE IS WHERE FUNCTOINS END #
 
 
 # HERE IS WHERE THE ACTUAL PROGRAM BEGINS #
+
+years = []
+
+for root, dirs, files in walk("."):
+    years.extend(dirs)
+    break
 
 ## SETTING UP THE ROOT ##
 root = Tk()
